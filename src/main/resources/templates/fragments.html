@@ -13,19 +13,34 @@
 
 <body>
 
-    <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a th:href="@{/}" class="navbar-brand">TechJobs</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a th:href="@{/search}">Search</a></li>
-                    <li><a th:href="@{/list}">List</a></li>
-                </ul>
-            </div>
+<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a th:href="@{/}" class="navbar-brand">TechJobs</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/search}">Search</a></li>
+                <li><a th:href="@{/list}">List</a></li>
+            </ul>
         </div>
     </div>
+</div>
+
+<div th:fragment="jobDisplay">
+    <table class="job-listing">
+        <tr th:each="job : ${jobs}">
+            <td>
+                <p>ID: <span class="data" th:text="${job.Id}"></span></p>
+                <p>Name: <span class="data" th:text="${job.name}"></span></p>
+                <p>Employer: <a th:href="@{/list/jobs(column=employer,value=${job.employer})}" class="data" th:text="${job.employer}"></a></p>
+                <p>Location: <a th:href="@{/list/jobs(column=location,value=${job.location})}" class="data" th:text="${job.location}"></a></p>
+                <p>Position Type: <a th:href="@{/list/jobs(column=positionType,value=${job.positionType})}" class="data" th:text="${job.positionType}"></a></p>
+                <p>Skill: <a th:href="@{/list/jobs(column=coreCompetency,value=${job.coreCompetency})}" class="data" th:text="${job.coreCompetency}"></a></p>
+            </td>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>
